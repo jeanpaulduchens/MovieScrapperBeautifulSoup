@@ -24,7 +24,15 @@ def run(playwright: Playwright):
     page = context.new_page()
     page.goto(url_scrapp)
     
-    page.locator("button.ipc-see-more__button").click(button="left")
+    # si queremos scrappear mas paginas, tenemos que clickear el boton de "ver mas", pero no está a la vista hay que scrollear
+    # page.locator("button.ipc-see-more__button").click(button="left")
+    btn = page.locator("button.ipc-see-more__button")
+    btn.scroll_into_view_if_needed()
+    btn.click()
+    
+    page.wait_for_timeout(2000)
+    if page.locator("li.ipc-metadata-list.summary-item").count() < 100:
+        page.wait_for_timeout(2000)
 
     html = page.content()
     browser.close()
