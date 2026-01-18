@@ -2,6 +2,12 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright, Playwright
 import re
 
+"""
+En este archivo se scrappean las peliculas de IMDB del 2018 usando Playwright para manejar el JS
+y BeautifulSoup para parsear el HTML resultante.
+Es lento e inestable porque depende de la carga del JS y de los clicks en el boton "ver mas".
+Puede fallar si IMDB cambia su estructura o si hay problemas de red.
+"""
 
 url_base = "https://www.imdb.com/search/title/"
 release_date = "2018-01-01,2018-12-31"
